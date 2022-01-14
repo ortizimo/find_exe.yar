@@ -8,12 +8,12 @@ rule find_exe_files
 		note = "Files in $Recycle.Bin do not show their actual name. Look for the file's metadata file ($I...) for its actual name"
 
 	strings:
-/*  Note: EXE shares HEX with DLL, COM, DRV, PIF, QTS, QTX and SYS files. If you uncomment $magic you will 
-		get all HEX files. Leaving it commented will reduce the amount of files that are not .exe */
-		
 		$magic = { 4d 5a 90 00 03 } private
-		$EXE = /[a-zA-Z0-9]{1,30}\.exe/ fullword ascii nocase
-		
+		$EXE = /[a-zA-Z0-9]{1,30}\.exe/ fullword ascii nocase private
+			
+			// note 1: Using (private) will stop scan to look inside documents for words with .exe in them
+			// note 2: EXE shares HEX with DLL, COM, DRV, SYS, MSI and many other files
+						
 	condition:
 		any of them
 }
