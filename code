@@ -3,6 +3,7 @@ rule find_exe_files
 	meta:
 		author = "Saulo 'Sal' Ortiz, Sr. Cyber Forensics Analyst"
 		description = "Scans for the file format of a specific file."
+		reference = "https://github.com/ortizimo/find_exe.yar/blob/main/code"
 		date = "2022-01-07"
 		updated = "2022-01-13"
 		note = "Files in $Recycle.Bin do not show their actual name. Look for the file's metadata file ($I...) for its actual name"
