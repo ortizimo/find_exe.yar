@@ -1,20 +1,20 @@
 rule find_exe_files
 {					
 	meta:
-		author = "Saulo 'Sal' Ortiz, Sr. Cyber Forensics Analyst"
+		author = "Saulo 'Sal' Ortiz, Sr. Cyber Forensics Analyst, ATG"
 		description = "Scans for the file format of a specific file."
 		reference = "https://github.com/ortizimo/find_exe.yar/blob/main/code"
 		date = "2022-01-07"
-		updated = "2022-01-13"
+		updated = "2022-02-14"
 		note = "Files in $Recycle.Bin do not show their actual name. Look for the file's metadata file ($I...) for its actual name"
 
 	strings:
-		$magic = { 4d 5a 90 00 03 } private
-		$EXE = /[a-zA-Z0-9]{1,30}\.exe/ fullword ascii nocase private
-			
-			// note 1: Using (private) will stop scan to look inside documents for words with .exe in them
-			// note 2: EXE shares HEX with DLL, COM, DRV, SYS, MSI and many other files
-						
-	condition:
-		any of them
+		$m1 = { 4d 5a } private 	// MZ
+		$m2 = { 2e 45 58 45 } private 	// .EXE
+		$m3 = { 2e 65 78 65 } private 	// .exe
+		$m4 = { 50 45 } private 	// PE
+
+		$f = /.exe*/is private 		// 980 hits w/o $m* + .ico info
+	conditions:
+		$f1 and $m1 and $m2 and $m3 or $m4 // 971 hits
 }
