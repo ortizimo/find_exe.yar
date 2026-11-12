@@ -1,7 +1,7 @@
 rule find_exe_files
 {					
 	meta:
-		author = "Saulo 'Sal' Ortiz, Sr. Cyber Forensics Analyst"
+		author = "ortizimo, Sr. Cyber ForensicsAnalyst"
 		description = "Scans for the file format of a specific file."
 		reference = "https://github.com/ortizimo/find_exe.yar/blob/main/code"
 		date = "2022-01-07"
